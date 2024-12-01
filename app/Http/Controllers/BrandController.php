@@ -63,12 +63,12 @@ class BrandController extends Controller
         ]);
 
         $brands = Brand::find($id);
-        if ($brands) {
-            return response()->json(['brand' => $brands]);
+        if (!$brands) {
+            return response()->json(['cant find brand']);
         }
 
         $brands->update($validatedData);
-        return response()->json(['message' => 'Brand updated successfully']);
+        return response()->json(['message' => 'Brand updated successfully', 'brand' => $brands]);
     }
 
     /**

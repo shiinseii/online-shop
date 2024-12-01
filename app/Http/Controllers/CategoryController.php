@@ -59,12 +59,12 @@ class CategoryController extends Controller
         ]);
 
         $categories = Category::find($id);
-        if ($categories) {
-            return response()->json(['category' => $categories]);
+        if (!$categories) {
+            return response()->json(['cant find category']);
         }
 
         $categories->update($validatedData);
-        return response()->json(['message' => 'Category updated successfully']);
+        return response()->json(['message' => 'Category updated successfully', 'category' => $categories]);
     }
 
     /**
